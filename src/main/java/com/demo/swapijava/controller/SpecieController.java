@@ -2,7 +2,6 @@ package com.demo.swapijava.controller;
 
 import com.demo.swapijava.service.SpecieService;
 import com.demo.swapijava.service.models.species.SpecieResponse;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
