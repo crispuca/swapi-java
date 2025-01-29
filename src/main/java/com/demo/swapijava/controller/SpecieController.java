@@ -5,9 +5,10 @@ import com.demo.swapijava.service.models.species.SpecieResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
+@RestController
 @RequestMapping("swapi/species")
 public class SpecieController {
 
