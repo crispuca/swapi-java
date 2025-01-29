@@ -1,11 +1,11 @@
-package com.demo.swapijava.models;
+package com.demo.swapijava.service.models.species;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Species implements Serializable {
+public class Specie implements Serializable {
 
     @JsonProperty("name")
     public String name;

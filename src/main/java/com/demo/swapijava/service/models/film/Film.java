@@ -1,4 +1,4 @@
-package com.demo.swapijava.models;
+package com.demo.swapijava.service.models.film;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,11 +1,11 @@
-package com.demo.swapijava.models;
+package com.demo.swapijava.service.models.starship;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Vehicle implements Serializable {
+public class Starship implements Serializable {
 
     @JsonProperty("name")
     public String name;
@@ -13,17 +13,17 @@ public class Vehicle implements Serializable {
     @JsonProperty("model")
     public String model;
 
-    @JsonProperty("vehicle_class")
-    public String vehicleClass;
+    @JsonProperty("starship_class")
+    public String starshipClass;
 
     @JsonProperty("manufacturer")
     public String manufacturer;
 
-    @JsonProperty("length")
-    public String length;
-
     @JsonProperty("cost_in_credits")
     public String costInCredits;
+
+    @JsonProperty("length")
+    public String length;
 
     @JsonProperty("crew")
     public String crew;
@@ -33,6 +33,12 @@ public class Vehicle implements Serializable {
 
     @JsonProperty("max_atmosphering_speed")
     public String maxAtmospheringSpeed;
+
+    @JsonProperty("hyperdrive_rating")
+    public String hyperdriveRating;
+
+    @JsonProperty("MGLT")
+    public String mglt;
 
     @JsonProperty("cargo_capacity")
     public String cargoCapacity;
