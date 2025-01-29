@@ -4,4 +4,5 @@ import com.demo.swapijava.service.models.people.PeopleResponse;
 
 public interface PeopleService {
     PeopleResponse findAll();
+    //PeopleResponse findById(Long Id);
 }

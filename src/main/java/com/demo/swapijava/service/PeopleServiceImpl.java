@@ -23,11 +23,24 @@ public class PeopleServiceImpl extends AbstractClient implements PeopleService{
                 uri, HttpMethod.GET, requestEntity , PeopleResponse.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
-            //log.info("Success{}", response.getBody().getStatus());
+            log.info("Success: {}", response.getStatusCode());
             return response.getBody();
         }
-        //log.error("Error getting people{}", response.getStatusCode());
+        log.error("Error getting people: {}", response.getStatusCode());
         throw new RuntimeException("Error");
     }
+
+/*    public PeopleResponse findById(Long id){
+        String uri = baseUrl + "/people/{id}";
+        HttpEntity<Void> requestEntity = null;
+        ResponseEntity<PeopleResponse> response = restTemplate.exchange(
+                uri, HttpMethod.GET, requestEntity , PeopleResponse.class);
+        if (response.getStatusCode().is2xxSuccessful()) {
+            log.info("Success: {}", response.getStatusCode());
+            return response.getBody();
+        }
+        log.error("Error getting people: {}", response.getStatusCode());
+        throw new RuntimeException("Error");
+    }*/
 
 }
