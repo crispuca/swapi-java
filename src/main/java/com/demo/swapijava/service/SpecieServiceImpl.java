@@ -1,7 +1,8 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.planet.PlanetResponse;
-import com.demo.swapijava.service.models.species.SpecieResponse;
+import com.demo.swapijava.service.models.species.SpecieResponseAll;
+import com.demo.swapijava.service.models.species.SpecieResponseById;
+import com.demo.swapijava.service.models.starship.StarshipResponseById;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -19,11 +20,11 @@ public class SpecieServiceImpl extends AbstractClient implements SpecieService {
     }
 
     @Override
-    public SpecieResponse findAll() {
+    public SpecieResponseAll findAll() {
         String uri = baseUrl + "/species";
         HttpEntity<Void> requestEntity = null;
-        ResponseEntity<SpecieResponse> response = restTemplate.exchange(
-                uri, HttpMethod.GET, requestEntity , SpecieResponse.class);
+        ResponseEntity<SpecieResponseAll> response = restTemplate.exchange(
+                uri, HttpMethod.GET, requestEntity , SpecieResponseAll.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             log.info("Success: {}", response.getStatusCode());
@@ -32,5 +33,14 @@ public class SpecieServiceImpl extends AbstractClient implements SpecieService {
         log.error("Error getting people: {}", response.getStatusCode());
         throw new RuntimeException("Error");
     }
+
+
+    @Override
+    public SpecieResponseById findById(Long id){
+        String uri = baseUrl + "/species/"+ id;
+        SpecieResponseById response = restTemplate.getForEntity(uri, SpecieResponseById.class).getBody();
+        return response;
+    }
+
 
 }

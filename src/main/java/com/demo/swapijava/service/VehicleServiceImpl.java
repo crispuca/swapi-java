@@ -1,6 +1,5 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.starship.StarshipResponseById;
 import com.demo.swapijava.service.models.vehicle.VehicleResponseAll;
 import com.demo.swapijava.service.models.vehicle.VehicleResponseById;
 import lombok.extern.slf4j.Slf4j;

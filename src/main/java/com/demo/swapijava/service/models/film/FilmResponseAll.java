@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class FilmResponse {
+public class FilmResponseAll {
 
-    public String status;
+    public String message;
 
-    @JsonProperty("results")
-    public List<Film> films;
+    @JsonProperty("result")
+    public List<Result> result;
 
 }

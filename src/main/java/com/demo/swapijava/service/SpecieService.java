@@ -1,8 +1,11 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.species.SpecieResponse;
+import com.demo.swapijava.service.models.species.SpecieResponseAll;
+import com.demo.swapijava.service.models.species.SpecieResponseById;
 
 public interface SpecieService {
 
-    SpecieResponse findAll();
+    SpecieResponseAll findAll();
+
+    SpecieResponseById findById(Long id);
 }

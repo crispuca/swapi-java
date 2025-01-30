@@ -1,6 +1,7 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.film.FilmResponse;
+import com.demo.swapijava.service.models.film.FilmResponseAll;
+import com.demo.swapijava.service.models.film.FilmResponseById;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -16,11 +17,11 @@ public class FilmServiceImpl extends AbstractClient implements FilmService{
         super(restTemplate);
     }
     @Override
-    public FilmResponse findAll() {
+    public FilmResponseAll findAll() {
         String uri = baseUrl + "/films";
         HttpEntity<Void> requestEntity = null;
-        ResponseEntity<FilmResponse> response = restTemplate.exchange(
-                uri, HttpMethod.GET, requestEntity , FilmResponse.class);
+        ResponseEntity<FilmResponseAll> response = restTemplate.exchange(
+                uri, HttpMethod.GET, requestEntity , FilmResponseAll.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             log.info("Success: {}", response.getStatusCode());
@@ -29,5 +30,12 @@ public class FilmServiceImpl extends AbstractClient implements FilmService{
         log.error("Error getting people: {}", response.getStatusCode());
         throw new RuntimeException("Error");
     }
+
+    public FilmResponseById findById(Long id){
+        String uri = baseUrl + "/films/"+ id;
+        FilmResponseById response = restTemplate.getForEntity(uri, FilmResponseById.class).getBody();
+        return response;
+    }
+
 
 }

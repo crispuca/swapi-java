@@ -1,8 +1,12 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.film.FilmResponse;
+import com.demo.swapijava.service.models.film.FilmResponseAll;
+import com.demo.swapijava.service.models.film.FilmResponseById;
 
 public interface FilmService {
 
-    FilmResponse findAll();
+    FilmResponseAll findAll();
+
+    FilmResponseById findById(Long id);
+
 }
