@@ -1,7 +1,7 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.starship.StarshipResponseAll;
-import com.demo.swapijava.service.models.starship.StarshipResponseById;
+import com.demo.swapijava.entities.starship.StarshipResponseAll;
+import com.demo.swapijava.entities.starship.StarshipResponseById;
 
 public interface StarshipService {
 

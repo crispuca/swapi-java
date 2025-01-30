@@ -1,9 +1,9 @@
 package com.demo.swapijava.controller;
 
 import com.demo.swapijava.service.PeopleService;
-import com.demo.swapijava.service.models.people.PeopleResponseAll;
-import com.demo.swapijava.service.models.people.PeopleResponseById;
-import com.demo.swapijava.service.models.people.Result;
+import com.demo.swapijava.entities.people.PeopleResponseAll;
+import com.demo.swapijava.entities.people.PeopleResponseById;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,11 +18,13 @@ public class PeopleController {
     }
 
     @GetMapping
+    @PreAuthorize("isAuthenticated()")
     public PeopleResponseAll findAll() {
         return this.peopleService.findAll();
     }
 
 
     @GetMapping("/{id}")
+    @PreAuthorize("isAuthenticated()")
     public PeopleResponseById findById(@PathVariable("id") long id){return this.peopleService.findById(id);}
 }

@@ -1,7 +1,7 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.vehicle.VehicleResponseAll;
-import com.demo.swapijava.service.models.vehicle.VehicleResponseById;
+import com.demo.swapijava.entities.vehicle.VehicleResponseAll;
+import com.demo.swapijava.entities.vehicle.VehicleResponseById;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;

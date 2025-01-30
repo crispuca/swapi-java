@@ -1,6 +1,6 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.planet.PlanetResponse;
+import com.demo.swapijava.entities.planet.PlanetResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;

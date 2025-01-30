@@ -1,6 +1,6 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.planet.PlanetResponse;
+import com.demo.swapijava.entities.planet.PlanetResponse;
 
 public interface PlanetService {
 

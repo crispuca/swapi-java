@@ -1,7 +1,7 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.film.FilmResponseAll;
-import com.demo.swapijava.service.models.film.FilmResponseById;
+import com.demo.swapijava.entities.film.FilmResponseAll;
+import com.demo.swapijava.entities.film.FilmResponseById;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;

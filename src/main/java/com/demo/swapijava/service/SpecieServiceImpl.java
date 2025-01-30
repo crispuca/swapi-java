@@ -1,8 +1,7 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.species.SpecieResponseAll;
-import com.demo.swapijava.service.models.species.SpecieResponseById;
-import com.demo.swapijava.service.models.starship.StarshipResponseById;
+import com.demo.swapijava.entities.species.SpecieResponseAll;
+import com.demo.swapijava.entities.species.SpecieResponseById;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;

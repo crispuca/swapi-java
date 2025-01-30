@@ -1,7 +1,7 @@
 package com.demo.swapijava.controller;
 
 import com.demo.swapijava.service.PlanetService;
-import com.demo.swapijava.service.models.planet.PlanetResponse;
+import com.demo.swapijava.entities.planet.PlanetResponse;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

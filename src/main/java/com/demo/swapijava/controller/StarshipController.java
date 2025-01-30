@@ -1,9 +1,8 @@
 package com.demo.swapijava.controller;
 
 import com.demo.swapijava.service.StarshipService;
-import com.demo.swapijava.service.models.people.PeopleResponseById;
-import com.demo.swapijava.service.models.starship.StarshipResponseAll;
-import com.demo.swapijava.service.models.starship.StarshipResponseById;
+import com.demo.swapijava.entities.starship.StarshipResponseAll;
+import com.demo.swapijava.entities.starship.StarshipResponseById;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,7 +1,7 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.film.FilmResponseAll;
-import com.demo.swapijava.service.models.film.FilmResponseById;
+import com.demo.swapijava.entities.film.FilmResponseAll;
+import com.demo.swapijava.entities.film.FilmResponseById;
 
 public interface FilmService {
 

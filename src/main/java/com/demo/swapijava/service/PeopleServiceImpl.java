@@ -1,8 +1,7 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.people.PeopleResponseAll;
-import com.demo.swapijava.service.models.people.PeopleResponseById;
-import com.demo.swapijava.service.models.people.Result;
+import com.demo.swapijava.entities.people.PeopleResponseAll;
+import com.demo.swapijava.entities.people.PeopleResponseById;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
