@@ -1,13 +1,12 @@
 package com.demo.swapijava.service.models.starship;
 
-import com.demo.swapijava.service.models.species.Specie;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
-public class StarshipResponse {
+public class StarshipResponseAll {
 
-    public String status;
+    public String message;
 
     @JsonProperty("results")
     public List<Starship> starships;

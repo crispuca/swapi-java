@@ -1,7 +1,8 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.planet.PlanetResponse;
-import com.demo.swapijava.service.models.starship.StarshipResponse;
+import com.demo.swapijava.service.models.people.PeopleResponseById;
+import com.demo.swapijava.service.models.starship.StarshipResponseAll;
+import com.demo.swapijava.service.models.starship.StarshipResponseById;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -19,11 +20,11 @@ public class StarshipServiceImpl extends AbstractClient implements StarshipServi
     }
 
     @Override
-    public StarshipResponse findAll() {
+    public StarshipResponseAll findAll() {
         String uri = baseUrl + "/starships";
         HttpEntity<Void> requestEntity = null;
-        ResponseEntity<StarshipResponse> response = restTemplate.exchange(
-                uri, HttpMethod.GET, requestEntity , StarshipResponse.class);
+        ResponseEntity<StarshipResponseAll> response = restTemplate.exchange(
+                uri, HttpMethod.GET, requestEntity , StarshipResponseAll.class);
 
         if (response.getStatusCode().is2xxSuccessful()) {
             log.info("Success: {}", response.getStatusCode());
@@ -31,6 +32,14 @@ public class StarshipServiceImpl extends AbstractClient implements StarshipServi
         }
         log.error("Error getting people: {}", response.getStatusCode());
         throw new RuntimeException("Error");
+    }
+
+
+    @Override
+    public StarshipResponseById findById(Long id){
+        String uri = baseUrl + "/starships/"+ id;
+        StarshipResponseById response = restTemplate.getForEntity(uri, StarshipResponseById.class).getBody();
+        return response;
     }
 
 }

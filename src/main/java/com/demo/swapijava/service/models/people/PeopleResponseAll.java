@@ -7,8 +7,8 @@ import java.util.List;
 
 
 @Data
-public class PeopleResponse {
-    public String status;
+public class PeopleResponseAll {
+    public String message;
 
     @JsonProperty("results")
     public List<People> people;

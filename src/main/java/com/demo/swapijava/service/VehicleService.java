@@ -1,8 +1,10 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.service.models.vehicle.VehicleResponse;
+import com.demo.swapijava.service.models.vehicle.VehicleResponseAll;
+import com.demo.swapijava.service.models.vehicle.VehicleResponseById;
 
 public interface VehicleService {
 
-    VehicleResponse findAll();
+    VehicleResponseAll findAll();
+    VehicleResponseById findById(Long id);
 }

@@ -1,8 +1,11 @@
 package com.demo.swapijava.controller;
 
 import com.demo.swapijava.service.VehicleService;
-import com.demo.swapijava.service.models.vehicle.VehicleResponse;
+import com.demo.swapijava.service.models.people.PeopleResponseById;
+import com.demo.swapijava.service.models.vehicle.VehicleResponseAll;
+import com.demo.swapijava.service.models.vehicle.VehicleResponseById;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,8 +20,12 @@ public class VehicleController {
     }
 
     @GetMapping
-    public VehicleResponse findAll() {
+    public VehicleResponseAll findAll() {
         return this.vehicleService.findAll();
     }
+
+
+    @GetMapping("/{id}")
+    public VehicleResponseById findById(@PathVariable("id") long id){return this.vehicleService.findById(id);}
 
 }

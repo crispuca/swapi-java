@@ -1,7 +1,9 @@
 package com.demo.swapijava.controller;
 
 import com.demo.swapijava.service.PeopleService;
-import com.demo.swapijava.service.models.people.PeopleResponse;
+import com.demo.swapijava.service.models.people.PeopleResponseAll;
+import com.demo.swapijava.service.models.people.PeopleResponseById;
+import com.demo.swapijava.service.models.people.Result;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,11 +18,11 @@ public class PeopleController {
     }
 
     @GetMapping
-    public PeopleResponse findAll() {
+    public PeopleResponseAll findAll() {
         return this.peopleService.findAll();
     }
 
 
-   /* @GetMapping("/{id}")
-    public PeopleResponse findById(@PathVariable long id){return this.peopleService.findById(id);}*/
+    @GetMapping("/{id}")
+    public PeopleResponseById findById(@PathVariable("id") long id){return this.peopleService.findById(id);}
 }
