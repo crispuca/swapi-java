@@ -2,11 +2,14 @@ package com.demo.swapijava.service;
 
 import com.demo.swapijava.entities.film.FilmResponseAll;
 import com.demo.swapijava.entities.film.FilmResponseById;
+import com.demo.swapijava.entities.people.PeopleResponseById;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
@@ -19,22 +22,43 @@ public class FilmServiceImpl extends AbstractClient implements FilmService{
     @Override
     public FilmResponseAll findAll() {
         String uri = baseUrl + "/films";
-        HttpEntity<Void> requestEntity = null;
-        ResponseEntity<FilmResponseAll> response = restTemplate.exchange(
-                uri, HttpMethod.GET, requestEntity , FilmResponseAll.class);
-
-        if (response.getStatusCode().is2xxSuccessful()) {
-            log.info("Success: {}", response.getStatusCode());
+        try {
+            ResponseEntity<FilmResponseAll> response = restTemplate.exchange(
+                    uri,
+                    HttpMethod.GET,
+                    null ,
+                    FilmResponseAll.class);
             return response.getBody();
+        }catch (HttpClientErrorException.NotFound e) {
+            throw new ResourceNotFoundException(" not found");
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while fetching");
         }
-        log.error("Error getting people: {}", response.getStatusCode());
-        throw new RuntimeException("Error");
+
+
     }
 
     public FilmResponseById findById(Long id){
+
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Invalid ID: " + id);
+        }
+
         String uri = baseUrl + "/films/"+ id;
-        FilmResponseById response = restTemplate.getForEntity(uri, FilmResponseById.class).getBody();
-        return response;
+
+        try{
+            ResponseEntity<FilmResponseById> responseEntity = restTemplate.exchange(
+                    uri,
+                    HttpMethod.GET,
+                    null,
+                    FilmResponseById.class);
+            return responseEntity.getBody();
+
+        }catch (HttpClientErrorException.NotFound e) {
+            throw new ResourceNotFoundException("Film with id " + id + " not found");
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while fetching person with id " + id, e);
+        }
     }
 
 

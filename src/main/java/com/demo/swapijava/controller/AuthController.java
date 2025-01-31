@@ -2,6 +2,7 @@ package com.demo.swapijava.controller;
 
 
 import com.demo.swapijava.security.JwtUtil;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.User;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
+@Tag(name = "Autentication", description = "Endpoints para la autenticacion ")
 public class AuthController {
 
 

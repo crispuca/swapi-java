@@ -2,12 +2,14 @@ package com.demo.swapijava.controller;
 
 import com.demo.swapijava.service.PlanetService;
 import com.demo.swapijava.entities.planet.PlanetResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("swapi/planets")
+@Tag(name = "Planets", description = "Endpoints para la gestión de los Planets con GetAll y GetById")
 public class PlanetController {
 
     private final PlanetService planetService;

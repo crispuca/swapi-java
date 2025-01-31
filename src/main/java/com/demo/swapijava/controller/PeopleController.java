@@ -3,12 +3,14 @@ package com.demo.swapijava.controller;
 import com.demo.swapijava.service.PeopleService;
 import com.demo.swapijava.entities.people.PeopleResponseAll;
 import com.demo.swapijava.entities.people.PeopleResponseById;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("swapi/people")
+@Tag(name = "People", description = "Endpoints para la gestión de People por GetAll y GetById")
 public class PeopleController {
 
     private final PeopleService peopleService;

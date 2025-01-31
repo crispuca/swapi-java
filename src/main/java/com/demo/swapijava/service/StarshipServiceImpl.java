@@ -1,12 +1,15 @@
 package com.demo.swapijava.service;
 
+import com.demo.swapijava.entities.species.SpecieResponseById;
 import com.demo.swapijava.entities.starship.StarshipResponseAll;
 import com.demo.swapijava.entities.starship.StarshipResponseById;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 
@@ -21,24 +24,45 @@ public class StarshipServiceImpl extends AbstractClient implements StarshipServi
     @Override
     public StarshipResponseAll findAll() {
         String uri = baseUrl + "/starships";
-        HttpEntity<Void> requestEntity = null;
-        ResponseEntity<StarshipResponseAll> response = restTemplate.exchange(
-                uri, HttpMethod.GET, requestEntity , StarshipResponseAll.class);
 
-        if (response.getStatusCode().is2xxSuccessful()) {
-            log.info("Success: {}", response.getStatusCode());
+        try {
+            ResponseEntity<StarshipResponseAll> response = restTemplate.exchange(
+                    uri,
+                    HttpMethod.GET,
+                    null ,
+                    StarshipResponseAll.class);
             return response.getBody();
+        }catch (HttpClientErrorException.NotFound e) {
+            throw new ResourceNotFoundException(" not found");
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while fetching");
         }
-        log.error("Error getting people: {}", response.getStatusCode());
-        throw new RuntimeException("Error");
+
     }
 
 
     @Override
     public StarshipResponseById findById(Long id){
+
+        if (id == null || id <= 0) {
+            throw new IllegalArgumentException("Invalid ID: " + id);
+        }
+
         String uri = baseUrl + "/starships/"+ id;
-        StarshipResponseById response = restTemplate.getForEntity(uri, StarshipResponseById.class).getBody();
-        return response;
+        try{
+            ResponseEntity<StarshipResponseById> responseEntity = restTemplate.exchange(
+                    uri,
+                    HttpMethod.GET,
+                    null,
+                    StarshipResponseById.class);
+
+            return responseEntity.getBody();
+        }catch (HttpClientErrorException.NotFound e) {
+            throw new ResourceNotFoundException("Person with id " + id + " not found");
+        } catch (Exception e) {
+            // Manejo general de otras excepciones (conexión, timeout, etc.)
+            throw new RuntimeException("An error occurred while fetching person with id " + id, e);
+        }
     }
 
 }
