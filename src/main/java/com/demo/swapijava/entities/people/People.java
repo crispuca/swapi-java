@@ -17,6 +17,9 @@ public class People implements Serializable {
 
     public String gender;
 
+    @JsonProperty("eye_color")
+    public String eyeColor;
+
     @JsonProperty("hair_color")
     public String hairColor;
 
