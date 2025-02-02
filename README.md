@@ -18,3 +18,26 @@ Otra cosa a tener en cuenta es un error que puede pasar al levantar la aplicacio
 Cabe recordar que esta seteada por defecto que funcione en el puerto 8080, se puede setear en otro puerto si asi lo quisiera
 
 Una vez definido eso se puede levantar la aplicacion
+
+Para poder usar la aplicacion podemos usar postman
+
+En este caso para iniciar la prueba de demas endpoints se debe hacer el login en la aplicacion, para ello se definio un login basico que incluyera un usuario en memoria, para poder hacer el login podemos importar el siguiente curl 
+
+curl --location 'http://localhost:8080/auth/login' \
+--header 'Content-Type: application/json' \
+--data '{
+    "username": "admin",
+    "password": "password"
+}'
+
+el cual usa un metodo POST, el cual al enviarlo nos devolvera por respuesta un token, la respuesta vendra en este formato
+
+
+{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczODQ2ODA4MSwiZXhwIjoxNzM4NDcxNjgxfQ.ebDNDoBFcnSkeAQnZIWs1pSo27WYbDaPdEYVBg8U6qI"
+}
+
+el token que nos de nos servirar para poder probar los demas endpoints, que spring security estaria protegiendo
+
+
+
