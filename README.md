@@ -37,7 +37,98 @@ el cual usa un metodo POST, el cual al enviarlo nos devolvera por respuesta un t
     "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTczODQ2ODA4MSwiZXhwIjoxNzM4NDcxNjgxfQ.ebDNDoBFcnSkeAQnZIWs1pSo27WYbDaPdEYVBg8U6qI"
 }
 
-el token que nos de nos servirar para poder probar los demas endpoints, que spring security estaria protegiendo
+el token que nos de nos servirar para poder probar los demas endpoints, que spring security estaria protegiendo, es necesario agregar el header Authorization = Bearer <token> para probar los siguientes endpoints
+
+A continuacion se dan ejemplos de cUrls para People, Specie, Starships, Vehicle y Film, todos los metodos son GET, reemplazar <token> con el token obtenido en el login
+
+##Enpoints para People
+
+GetAll
+
+curl --location 'http://localhost:8080/swapi/people' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+GetById
+
+curl --location 'http://localhost:8080/swapi/people/2' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+##Endpoints para Specie
+
+GetAll
+
+curl --location 'http://localhost:8080/swapi/species' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+GetById
+
+curl --location 'http://localhost:8080/swapi/species/2' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+##Endpoint para Film
+
+GetAll
+
+curl --location 'http://localhost:8080/swapi/films' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+GetById
+
+curl --location 'http://localhost:8080/swapi/films/2' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+##Endpoints para Starship 
+
+GetAll
+
+curl --location 'http://localhost:8080/swapi/starships' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+GetById
+
+curl --location 'http://localhost:8080/swapi/starships/2' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+
+##Endpoints para Vehicle
+
+GetAll
+
+curl --location 'http://localhost:8080/swapi/vehicles' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+GetById
+
+curl --location 'http://localhost:8080/swapi/vehicles/2' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <token>'
+
+Con estos cUrls podemos consumir la api swapi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
