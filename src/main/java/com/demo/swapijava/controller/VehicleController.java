@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("swapi/vehicles")
-@Tag(name = "Vehicles", description = "Endpoints para la gestión de los Vehicles con GetAll y GetById")
 public class VehicleController {
 
     private final VehicleService vehicleService;

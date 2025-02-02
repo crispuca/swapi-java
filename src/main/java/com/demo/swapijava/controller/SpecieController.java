@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("swapi/species")
-@Tag(name = "Species", description = "Endpoints para la gestión de Species con GetAll y GetById")
 public class SpecieController {
 
     private final SpecieService specieService;

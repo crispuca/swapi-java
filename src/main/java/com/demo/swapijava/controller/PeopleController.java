@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("swapi/people")
-@Tag(name = "People", description = "Endpoints para la gestión de People por GetAll y GetById")
 public class PeopleController {
 
     private final PeopleService peopleService;

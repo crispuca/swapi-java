@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtUtil {
 
-    private String SECRET_KEY = "EstaEsUnaClaveMuyLargaParaJWT2024perotienequesermaslarga";
+    private String SECRET_KEY = "EstaEsUnaClaveMuyLargaParaJWTPeroTieneQueSerMasLarga2025";
 
 
     public String generateToken(String username) {

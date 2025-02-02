@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("swapi/planets")
-@Tag(name = "Planets", description = "Endpoints para la gestión de los Planets con GetAll y GetById")
 public class PlanetController {
 
     private final PlanetService planetService;

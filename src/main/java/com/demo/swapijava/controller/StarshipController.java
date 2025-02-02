@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("swapi/starships")
-@Tag(name = "Starships", description = "Endpoints para la gestión de Starship con GetAll y GetById")
 public class StarshipController {
 
     private final StarshipService starshipService;

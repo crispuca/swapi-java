@@ -2,11 +2,16 @@ package com.demo.swapijava.entities.people;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Data
+@Getter
+@Setter
 public class People implements Serializable {
 
     @JsonProperty("name")
@@ -24,9 +29,6 @@ public class People implements Serializable {
     public String hairColor;
 
     public String height;
-
-    @JsonProperty("homeworld")
-    public String homeWorldUrl;
 
     public String mass;
 
@@ -48,8 +50,33 @@ public class People implements Serializable {
     @JsonProperty("url")
     public String url;
 
+    private String homeworld;
     public String created;
 
     public String edited;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Properties that = (Properties) o;
+        return Objects.equals(height, that.height) &&
+                Objects.equals(mass, that.mass) &&
+                Objects.equals(hairColor, that.hairColor) &&
+                Objects.equals(skinColor, that.skinColor) &&
+                Objects.equals(eyeColor, that.eyeColor) &&
+                Objects.equals(birthYear, that.birthYear) &&
+                Objects.equals(gender, that.gender) &&
+                Objects.equals(created, that.created) &&
+                Objects.equals(edited, that.edited) &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(homeworld, that.getHomeworld()) &&
+                Objects.equals(url, that.url);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(height, mass, hairColor, skinColor, eyeColor, birthYear, gender, created, edited, name, homeworld, url);
+    }
 
 }
