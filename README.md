@@ -114,8 +114,9 @@ curl --location 'http://localhost:8080/swapi/vehicles/2' \
 
 Con estos cUrls podemos consumir la api swapi 
 
+Otra manera de consumir la aplicacion es pegandole a este dominio http://swapi-java-ab5008a6b3eb.herokuapp.com agregando las rutas necesarias, como probarlo de manera local, osea en principio obteniendo el token y luego agregandolo en el header
 
-
+Este es el dominio de la aplicacion levantada en Heroku
 
 
 
