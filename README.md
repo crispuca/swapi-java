@@ -2,4 +2,19 @@
 
 ### Integracion con la api de Star Wars
 
+Esta api es un client desarrollado en springboot para consumir la api de star wars, contiene los metodos para GetAll() y GetById() de las entidades People, Starship, Vehicle, Specie y Planet, posee un metodo de login con autenticacion y autorizacion con jwt, con un token valido por 1 hora, todo lo mencionado anteriormente esta desarrollado con spring security 6 y springboot 3
 
+##Primeros pasos
+para poder levantar el proyecto es necesario tener java 17-correto y maven 3.9, ademas de eso se debe tener configurado JAVA-HOME Y MAVEN-HOME en las variables del sistema
+
+Para poder clonar el proyecto solo necesitar determinar en que path de archivos vas clonar el proyecto y ubicarte en tu consola en ese patch y ejecutar git clone https://github.com/crispuca/swapi-java.git 
+
+Luego de haner hecho los pasos anteriores ya podes buildear el proyecto, con tu ide predilecto, en mi caso intellij IDEA, abrimos el proyecto clonado y ejecutamos mvn install, esto hara que se ejecute la instalacion de las dependencias, ya que es el manejador de dependencias que utiliza este proyecto
+
+Antes de poder levantar el proyecto es necesario verificar que el sdk quen esta utilizando el IDE sea el de java 17, esto lo puede verificar en Project Structure > Project tiene que estar seteado java-17-correto
+
+Otra cosa a tener en cuenta es un error que puede pasar al levantar la aplicacion es una notacion que utilice, en este caso "log" que el ide no lo reconoce, pero esto se solucionar dirigiendose a Settings > Build, Execution, Deployment > Compiler > Annotation Processors y pararte en el nombre dela proyecto que es swapi-java y tildar la opcion Obtain Processors from project classpath, se guarda y ya estaria configurado para arrancar la app
+
+Cabe recordar que esta seteada por defecto que funcione en el puerto 8080, se puede setear en otro puerto si asi lo quisiera
+
+Una vez definido eso se puede levantar la aplicacion
