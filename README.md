@@ -182,9 +182,15 @@ Agrega las rutas necesarias a este dominio, igual que lo harías en la versión 
 
 ---
 
+### Tests
 
+El proyecto posee test de integracion y test unitarios, que para poder ejecutar los test se puede utilizar el comando en consola 
 
+   ```bash
+   mvn test
+   ```
 
+Despues de esto se ejecutaran todos los test con la etiqueta @Test que se encuentran en el proyecto
 
 
 
