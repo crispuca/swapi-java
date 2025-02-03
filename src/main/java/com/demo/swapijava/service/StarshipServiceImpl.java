@@ -1,11 +1,9 @@
 package com.demo.swapijava.service;
 
-import com.demo.swapijava.entities.species.SpecieResponseById;
 import com.demo.swapijava.entities.starship.StarshipResponseAll;
 import com.demo.swapijava.entities.starship.StarshipResponseById;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;

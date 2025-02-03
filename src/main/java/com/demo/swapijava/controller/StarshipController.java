@@ -3,7 +3,6 @@ package com.demo.swapijava.controller;
 import com.demo.swapijava.service.StarshipService;
 import com.demo.swapijava.entities.starship.StarshipResponseAll;
 import com.demo.swapijava.entities.starship.StarshipResponseById;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

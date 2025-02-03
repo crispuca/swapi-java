@@ -1,13 +1,12 @@
-package com.demo.swapijava.units;
-
+package com.demo.swapijava.unitTest.service;
 
 import com.demo.swapijava.entities.people.PeopleResponseAll;
 import com.demo.swapijava.entities.people.PeopleResponseById;
-import com.demo.swapijava.entities.species.Properties;
-import com.demo.swapijava.entities.species.Result;
-import com.demo.swapijava.entities.species.SpecieResponseAll;
-import com.demo.swapijava.entities.species.SpecieResponseById;
-import com.demo.swapijava.service.SpecieServiceImpl;
+import com.demo.swapijava.entities.vehicle.Properties;
+import com.demo.swapijava.entities.vehicle.Result;
+import com.demo.swapijava.entities.vehicle.VehicleResponseAll;
+import com.demo.swapijava.entities.vehicle.VehicleResponseById;
+import com.demo.swapijava.service.VehicleServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -19,44 +18,44 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-public class SpecieServiceTest {
+public class VehicleServiceTest {
+
+
 
     @Mock
     private RestTemplate restTemplate;
 
     @InjectMocks
-    private SpecieServiceImpl specieServiceImpl;
+    private VehicleServiceImpl vehicleServiceImpl;
 
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
 
+
+
     @Test
-    public void specieGetAllSuccessTest(){
-        SpecieResponseAll response = new SpecieResponseAll();
+    public void vehicleGetAllSuccessTest(){
+        VehicleResponseAll response = new VehicleResponseAll();
         response.setMessage("ok");
 
         when(restTemplate.exchange(
                 anyString(),
                 eq(HttpMethod.GET),
                 any(),
-                eq(SpecieResponseAll.class)
+                eq(VehicleResponseAll.class)
         )).thenReturn(ResponseEntity.ok(response));
 
 
         // Llamar al método findAll
-        SpecieResponseAll resultResponse = specieServiceImpl.findAll();
+        VehicleResponseAll resultResponse = vehicleServiceImpl.findAll();
 
         // Asegúrate de que la respuesta es la esperada
         assertNotNull(resultResponse);
@@ -64,8 +63,9 @@ public class SpecieServiceTest {
 
     }
 
+
     @Test
-    public void specieGetAllNotFetchTest(){
+    public void vehicleGetAllNotFetchTest(){
         when(restTemplate.exchange(
                 anyString(),
                 eq(HttpMethod.GET),
@@ -75,43 +75,36 @@ public class SpecieServiceTest {
 
         // Llamar al método y verificar que lanza la excepción correcta
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            specieServiceImpl.findAll();
+            vehicleServiceImpl.findAll();
         });
 
         assertEquals("An error occurred while fetching", exception.getMessage());
     }
 
     @Test
-    public void specieGetByIdSuccessTest() {
+    public void vehicleGetByIdSuccessTest() {
 
 
-        SpecieResponseById response = new SpecieResponseById();
+        VehicleResponseById response = new VehicleResponseById();
         Result result = new Result();
         Properties properties = new Properties();
 
         // Establecer los valores que esperas
-        properties.setClassification("artificial");
-        properties.setDesignation("sentient");
-        properties.setAverageHeight("n/a");
-        properties.setAverageLifespan("indefinite");
-        properties.setHairColors("n/a");
-        properties.setSkinColors("n/a");
-        properties.setEyeColors("n/a");
-        properties.setCreated("2025-02-02T13:42:49.781Z");
-        properties.setEdited("2025-02-02T13:42:49.781Z");
-        properties.setName("Droid");
-        properties.setHomeWorld("https://www.swapi.tech/api/planets/2");
-        properties.setUrl("https://www.swapi.tech/api/species/2");
+        properties.setModel("Digger Crawler");
+        properties.setVehicleClass("wheeled");
+        properties.setManufacturer("Corellia Mining Corporation");
+        properties.setCostInCredits("150000");
+        properties.setLength("36.8 ");
+        properties.setCrew("46");
+        properties.setPassengers("30");
+        properties.setMaxAtmospheringSpeed("30");
+        properties.setCargoCapacity("50000");
+        properties.setConsumables("2 months");
+        properties.setCreated("2020-09-17T17:46:31.415Z");
+        properties.setEdited("2020-09-17T17:46:31.415Z");
+        properties.setName("Sand Crawler");
+        properties.setUrl("https://www.swapi.tech/api/vehicles/4");
 
-
-        List<String> people = new ArrayList<>(Arrays.asList(
-                "https://www.swapi.tech/api/people/2",
-                "https://www.swapi.tech/api/people/3",
-                "https://www.swapi.tech/api/people/8",
-                "https://www.swapi.tech/api/people/23"
-        ));
-
-        properties.setPeopleUrls(people);
 
         result.setProperties(properties);
         response.setMessage("ok");
@@ -122,11 +115,11 @@ public class SpecieServiceTest {
                 anyString(),
                 eq(HttpMethod.GET),
                 any(),
-                eq(SpecieResponseById.class)
+                eq(VehicleResponseById.class)
         )).thenReturn(ResponseEntity.ok(response));
 
         // Llamar al método findById
-        SpecieResponseById resultResponse = specieServiceImpl.findById(2L);
+        VehicleResponseById resultResponse = vehicleServiceImpl.findById(4L);
 
         // Asegúrate de que la respuesta es la esperada
         assertNotNull(resultResponse);
@@ -134,9 +127,8 @@ public class SpecieServiceTest {
         assertEquals(response, resultResponse);
     }
 
-
     @Test
-    public void specieFindByIdNotFoundTest() {
+    public void vehicleFindByIdNotFoundTest() {
         // Simula un error 404 cuando no se encuentra el recurso
         when(restTemplate.exchange(
                 anyString(),
@@ -147,16 +139,16 @@ public class SpecieServiceTest {
 
         // Llamar al método y verificar que lanza la excepción correcta
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            specieServiceImpl.findById(999L);
+            vehicleServiceImpl.findById(999L);
         });
 
-        assertEquals("An error occurred while fetching specie with id 999", exception.getMessage());
+        assertEquals("An error occurred while fetching vehicle with id 999", exception.getMessage());
     }
 
     @Test
-    public void specieFindByIdInvalidIdTest() {
+    public void vehicleFindByIdInvalidIdTest() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            specieServiceImpl.findById(-1L);
+            vehicleServiceImpl.findById(-1L);
         });
 
         assertEquals("Invalid ID: -1", exception.getMessage());

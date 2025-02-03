@@ -1,4 +1,4 @@
-package com.demo.swapijava.intregation;
+package com.demo.swapijava.intregationTest;
 
 import com.demo.swapijava.security.SecurityConfig;
 import org.junit.jupiter.api.Test;

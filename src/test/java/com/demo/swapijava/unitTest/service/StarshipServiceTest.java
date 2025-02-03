@@ -1,8 +1,7 @@
-package com.demo.swapijava.units;
+package com.demo.swapijava.unitTest.service;
 
 import com.demo.swapijava.entities.people.PeopleResponseAll;
 import com.demo.swapijava.entities.people.PeopleResponseById;
-import com.demo.swapijava.entities.species.SpecieResponseAll;
 import com.demo.swapijava.entities.starship.Properties;
 import com.demo.swapijava.entities.starship.Result;
 import com.demo.swapijava.entities.starship.StarshipResponseAll;
@@ -18,10 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
