@@ -24,16 +24,20 @@ public class SpecieServiceImpl extends AbstractClient implements SpecieService {
     @Override
     public SpecieResponseAll findAll() {
         String uri = baseUrl + "/species";
-        HttpEntity<Void> requestEntity = null;
-        ResponseEntity<SpecieResponseAll> response = restTemplate.exchange(
-                uri, HttpMethod.GET, requestEntity , SpecieResponseAll.class);
 
-        if (response.getStatusCode().is2xxSuccessful()) {
-            log.info("Success: {}", response.getStatusCode());
+        try {
+            ResponseEntity<SpecieResponseAll> response = restTemplate.exchange(
+                    uri,
+                    HttpMethod.GET,
+                    null,
+                    SpecieResponseAll.class);
             return response.getBody();
+
+        }catch (HttpClientErrorException.NotFound e) {
+            throw new ResourceNotFoundException("not found");
+        } catch (Exception e) {
+            throw new RuntimeException("An error occurred while fetching");
         }
-        log.error("Error getting people: {}", response.getStatusCode());
-        throw new RuntimeException("Error");
     }
 
 
@@ -55,10 +59,10 @@ public class SpecieServiceImpl extends AbstractClient implements SpecieService {
 
             return responseEntity.getBody();
         }catch (HttpClientErrorException.NotFound e) {
-            throw new ResourceNotFoundException("Person with id " + id + " not found");
+            throw new ResourceNotFoundException("Specie with id " + id + " not found");
         } catch (Exception e) {
             // Manejo general de otras excepciones (conexión, timeout, etc.)
-            throw new RuntimeException("An error occurred while fetching person with id " + id, e);
+            throw new RuntimeException("An error occurred while fetching specie with id " + id, e);
         }
     }
 

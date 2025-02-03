@@ -27,7 +27,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/auth/login", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()// Permite acceso sin autenticación, agregar , "/swapi/**" para los test de integracion
+                        .requestMatchers("/auth/login", "/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html", "/swapi/**").permitAll()// Permite acceso sin autenticación, agregar , "/swapi/**" para los test de integracion
                         .anyRequest().authenticated()  // Requiere autenticación para cualquier otra solicitud
                 )
                 .addFilterBefore(new JwtFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class)  // Agrega el filtro JWT

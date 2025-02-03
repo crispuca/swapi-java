@@ -32,7 +32,7 @@ public class PeopleServiceImpl extends AbstractClient implements PeopleService{
                     PeopleResponseAll.class);
             return response.getBody();
         }catch (HttpClientErrorException.NotFound e) {
-            throw new ResourceNotFoundException(" not found");
+            throw new ResourceNotFoundException("not found");
         } catch (Exception e) {
             throw new RuntimeException("An error occurred while fetching");
         }
@@ -55,7 +55,13 @@ public class PeopleServiceImpl extends AbstractClient implements PeopleService{
                     null,
                     PeopleResponseById.class);
 
-            return responseEntity.getBody();
+            if (responseEntity != null && responseEntity.getBody() != null) {
+                return responseEntity.getBody();
+            } else {
+                throw new RuntimeException("An error occurred while fetching person with id " + id);
+            }
+
+
         }catch (HttpClientErrorException.NotFound e) {
             throw new ResourceNotFoundException("Person with id " + id + " not found");
         } catch (Exception e) {

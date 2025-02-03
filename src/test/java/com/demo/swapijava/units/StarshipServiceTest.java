@@ -1,29 +1,42 @@
 package com.demo.swapijava.units;
 
-import com.demo.swapijava.entities.people.*;
-import com.demo.swapijava.service.PeopleServiceImpl;
+import com.demo.swapijava.entities.people.PeopleResponseAll;
+import com.demo.swapijava.entities.people.PeopleResponseById;
+import com.demo.swapijava.entities.species.SpecieResponseAll;
+import com.demo.swapijava.entities.starship.Properties;
+import com.demo.swapijava.entities.starship.Result;
+import com.demo.swapijava.entities.starship.StarshipResponseAll;
+import com.demo.swapijava.entities.starship.StarshipResponseById;
+import com.demo.swapijava.service.StarshipServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-public class PeopleServiceTest {
+public class StarshipServiceTest {
+
 
     @Mock
     private RestTemplate restTemplate;
 
     @InjectMocks
-    private PeopleServiceImpl peopleServiceImpl;
+    private StarshipServiceImpl starshipServiceImpl;
 
     @BeforeEach
     public void setUp() {
@@ -32,20 +45,20 @@ public class PeopleServiceTest {
 
 
     @Test
-    public void peopleGetAllSuccessTest(){
-        PeopleResponseAll response = new PeopleResponseAll();
+    public void starshipGetAllSuccessTest(){
+        StarshipResponseAll response = new StarshipResponseAll();
         response.setMessage("ok");
 
         when(restTemplate.exchange(
                 anyString(),
                 eq(HttpMethod.GET),
                 any(),
-                eq(PeopleResponseAll.class)
+                eq(StarshipResponseAll.class)
         )).thenReturn(ResponseEntity.ok(response));
 
 
         // Llamar al método findAll
-        PeopleResponseAll resultResponse = peopleServiceImpl.findAll();
+        StarshipResponseAll resultResponse = starshipServiceImpl.findAll();
 
         // Asegúrate de que la respuesta es la esperada
         assertNotNull(resultResponse);
@@ -55,7 +68,7 @@ public class PeopleServiceTest {
 
 
     @Test
-    public void peopleGetAllNotFetchTest(){
+    public void starshipGetAllNotFetchTest(){
         when(restTemplate.exchange(
                 anyString(),
                 eq(HttpMethod.GET),
@@ -65,35 +78,38 @@ public class PeopleServiceTest {
 
         // Llamar al método y verificar que lanza la excepción correcta
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            peopleServiceImpl.findAll();
+            starshipServiceImpl.findAll();
         });
 
         assertEquals("An error occurred while fetching", exception.getMessage());
     }
 
-
-
     @Test
-    public void peopleGetByIdSuccessTest() {
+    public void starshipGetByIdSuccessTest() {
 
 
-        PeopleResponseById response = new PeopleResponseById();
+        StarshipResponseById response = new StarshipResponseById();
         Result result = new Result();
         Properties properties = new Properties();
 
         // Establecer los valores que esperas
-        properties.setHeight("167");
-        properties.setMass("75");
-        properties.setHairColor("n/a");
-        properties.setSkinColor("gold");
-        properties.setEyeColor("yellow");
-        properties.setBirthYear("112BBY");
-        properties.setGender("n/a");
-        properties.setCreated("2025-02-01T13:17:19.027Z");
-        properties.setEdited("2025-02-01T13:17:19.027Z");
-        properties.setName("C-3PO");
-        properties.setHomeworld("https://www.swapi.tech/api/planets/1");
-        properties.setUrl("https://www.swapi.tech/api/people/2");
+        properties.setModel("CR90 corvette");
+        properties.setStarshipClass("corvette");
+        properties.setManufacturer("Corellian Engineering Corporation");
+        properties.setCostInCredits("3500000");
+        properties.setLength("150");
+        properties.setCrew("30-165");
+        properties.setPassengers("600");
+        properties.setMaxAtmospheringSpeed("950");
+        properties.setHyperdriveRating("2.0");
+        properties.setMglt("60");
+        properties.setCargoCapacity("3000000");
+        properties.setConsumables("1 year");
+        properties.setCreated("2020-09-17T17:55:06.604Z");
+        properties.setEdited("2020-09-17T17:55:06.604Z");
+        properties.setName("CR90 corvette");
+        properties.setUrl("https://www.swapi.tech/api/starships/2");
+
 
         result.setProperties(properties);
         response.setMessage("ok");
@@ -104,11 +120,11 @@ public class PeopleServiceTest {
                 anyString(),
                 eq(HttpMethod.GET),
                 any(),
-                eq(PeopleResponseById.class)
+                eq(StarshipResponseById.class)
         )).thenReturn(ResponseEntity.ok(response));
 
         // Llamar al método findById
-        PeopleResponseById resultResponse = peopleServiceImpl.findById(2L);
+        StarshipResponseById resultResponse = starshipServiceImpl.findById(2L);
 
         // Asegúrate de que la respuesta es la esperada
         assertNotNull(resultResponse);
@@ -117,9 +133,8 @@ public class PeopleServiceTest {
     }
 
 
-
     @Test
-    public void peopleFindByIdNotFoundTest() {
+    public void starshipFindByIdNotFoundTest() {
         // Simula un error 404 cuando no se encuentra el recurso
         when(restTemplate.exchange(
                 anyString(),
@@ -130,18 +145,19 @@ public class PeopleServiceTest {
 
         // Llamar al método y verificar que lanza la excepción correcta
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            peopleServiceImpl.findById(999L);
+            starshipServiceImpl.findById(999L);
         });
 
-        assertEquals("An error occurred while fetching person with id 999", exception.getMessage());
+        assertEquals("An error occurred while fetching starship with id 999", exception.getMessage());
     }
 
     @Test
-    public void peopleFindByIdInvalidIdTest() {
+    public void starshipFindByIdInvalidIdTest() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            peopleServiceImpl.findById(-1L);
+            starshipServiceImpl.findById(-1L);
         });
 
         assertEquals("Invalid ID: -1", exception.getMessage());
     }
+
 }

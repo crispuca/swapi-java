@@ -32,7 +32,7 @@ public class VehicleServiceImpl extends AbstractClient implements VehicleService
                     VehicleResponseAll.class);
             return response.getBody();
         }catch (HttpClientErrorException.NotFound e) {
-            throw new ResourceNotFoundException(" not found");
+            throw new ResourceNotFoundException("not found");
         } catch (Exception e) {
             throw new RuntimeException("An error occurred while fetching");
         }
@@ -58,10 +58,10 @@ public class VehicleServiceImpl extends AbstractClient implements VehicleService
 
             return responseEntity.getBody();
         }catch (HttpClientErrorException.NotFound e) {
-            throw new ResourceNotFoundException("Person with id " + id + " not found");
+            throw new ResourceNotFoundException("Vehicle with id " + id + " not found");
         } catch (Exception e) {
             // Manejo general de otras excepciones (conexión, timeout, etc.)
-            throw new RuntimeException("An error occurred while fetching person with id " + id, e);
+            throw new RuntimeException("An error occurred while fetching vehicle with id " + id, e);
         }
     }
 

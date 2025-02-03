@@ -1,29 +1,32 @@
 package com.demo.swapijava.units;
 
-import com.demo.swapijava.entities.people.*;
-import com.demo.swapijava.service.PeopleServiceImpl;
+import com.demo.swapijava.entities.film.FilmResponseAll;
+import com.demo.swapijava.entities.people.PeopleResponseAll;
+import com.demo.swapijava.entities.people.PeopleResponseById;
+import com.demo.swapijava.service.FilmServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
-public class PeopleServiceTest {
+public class FilmServiceTest {
 
     @Mock
     private RestTemplate restTemplate;
 
     @InjectMocks
-    private PeopleServiceImpl peopleServiceImpl;
+    private FilmServiceImpl filmServiceImpl;
 
     @BeforeEach
     public void setUp() {
@@ -31,31 +34,29 @@ public class PeopleServiceTest {
     }
 
 
-    @Test
-    public void peopleGetAllSuccessTest(){
-        PeopleResponseAll response = new PeopleResponseAll();
+   @Test
+    public void filmGetAllSuccessTest(){
+        FilmResponseAll response = new FilmResponseAll();
         response.setMessage("ok");
 
         when(restTemplate.exchange(
                 anyString(),
                 eq(HttpMethod.GET),
                 any(),
-                eq(PeopleResponseAll.class)
+                eq(FilmResponseAll.class)
         )).thenReturn(ResponseEntity.ok(response));
 
 
         // Llamar al método findAll
-        PeopleResponseAll resultResponse = peopleServiceImpl.findAll();
+        FilmResponseAll resultResponse = filmServiceImpl.findAll();
 
         // Asegúrate de que la respuesta es la esperada
         assertNotNull(resultResponse);
         assertEquals("ok", resultResponse.getMessage());
-
     }
 
-
     @Test
-    public void peopleGetAllNotFetchTest(){
+    public void filmGetAllNotFetchTest(){
         when(restTemplate.exchange(
                 anyString(),
                 eq(HttpMethod.GET),
@@ -65,7 +66,7 @@ public class PeopleServiceTest {
 
         // Llamar al método y verificar que lanza la excepción correcta
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            peopleServiceImpl.findAll();
+            filmServiceImpl.findAll();
         });
 
         assertEquals("An error occurred while fetching", exception.getMessage());
@@ -74,52 +75,7 @@ public class PeopleServiceTest {
 
 
     @Test
-    public void peopleGetByIdSuccessTest() {
-
-
-        PeopleResponseById response = new PeopleResponseById();
-        Result result = new Result();
-        Properties properties = new Properties();
-
-        // Establecer los valores que esperas
-        properties.setHeight("167");
-        properties.setMass("75");
-        properties.setHairColor("n/a");
-        properties.setSkinColor("gold");
-        properties.setEyeColor("yellow");
-        properties.setBirthYear("112BBY");
-        properties.setGender("n/a");
-        properties.setCreated("2025-02-01T13:17:19.027Z");
-        properties.setEdited("2025-02-01T13:17:19.027Z");
-        properties.setName("C-3PO");
-        properties.setHomeworld("https://www.swapi.tech/api/planets/1");
-        properties.setUrl("https://www.swapi.tech/api/people/2");
-
-        result.setProperties(properties);
-        response.setMessage("ok");
-        response.setResult(result);
-
-        // Simula la respuesta del RestTemplate
-        when(restTemplate.exchange(
-                anyString(),
-                eq(HttpMethod.GET),
-                any(),
-                eq(PeopleResponseById.class)
-        )).thenReturn(ResponseEntity.ok(response));
-
-        // Llamar al método findById
-        PeopleResponseById resultResponse = peopleServiceImpl.findById(2L);
-
-        // Asegúrate de que la respuesta es la esperada
-        assertNotNull(resultResponse);
-        assertEquals("ok", resultResponse.getMessage());
-        assertEquals(response, resultResponse);
-    }
-
-
-
-    @Test
-    public void peopleFindByIdNotFoundTest() {
+    public void filmFindByIdNotFoundTest() {
         // Simula un error 404 cuando no se encuentra el recurso
         when(restTemplate.exchange(
                 anyString(),
@@ -130,16 +86,16 @@ public class PeopleServiceTest {
 
         // Llamar al método y verificar que lanza la excepción correcta
         Exception exception = assertThrows(RuntimeException.class, () -> {
-            peopleServiceImpl.findById(999L);
+            filmServiceImpl.findById(999L);
         });
 
         assertEquals("An error occurred while fetching person with id 999", exception.getMessage());
     }
 
     @Test
-    public void peopleFindByIdInvalidIdTest() {
+    public void filmFindByIdInvalidIdTest() {
         Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            peopleServiceImpl.findById(-1L);
+            filmServiceImpl.findById(-1L);
         });
 
         assertEquals("Invalid ID: -1", exception.getMessage());

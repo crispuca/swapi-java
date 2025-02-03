@@ -30,7 +30,7 @@ public class FilmServiceImpl extends AbstractClient implements FilmService{
                     FilmResponseAll.class);
             return response.getBody();
         }catch (HttpClientErrorException.NotFound e) {
-            throw new ResourceNotFoundException(" not found");
+            throw new ResourceNotFoundException("not found");
         } catch (Exception e) {
             throw new RuntimeException("An error occurred while fetching");
         }
